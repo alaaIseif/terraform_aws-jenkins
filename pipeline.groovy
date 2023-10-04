@@ -19,8 +19,7 @@ pipeline {
             steps {
                 git(
                     url: "https://github.com/alaaIseif/terraform_aws-jenkins.git",
-                    branch: "master",
-                    poll: true
+                    branch: "main"
                 )
             }
         }
@@ -54,10 +53,10 @@ pipeline {
                 script {
                      if (environment == 'dev') {
                         tfVars_filename = "dev.tfvars"
-                        sh 'terraform workspace select dev '
+                        sh 'terraform workspace select dev'
                     } else if (environment == 'prod') {
                         tfVars_filename = "prod.tfvars"
-                        sh 'terraform workspace select prod '
+                        sh 'terraform workspace select prod'
                     }
                      // Run Terraform plan command for the selected environment
                     sh "terraform plan -var-file=${tfVars_filename}"
@@ -79,6 +78,11 @@ pipeline {
 
                     if (approval.trim() == 'yes') {
                         withCredentials([string(credentialsId: 'tfVars_filename', variable: 'tfVars_filename')]) {
+                              if (environment == 'dev') {
+                                tfVars_filename = "dev.tfvars"
+                            } else if (environment == 'prod') {
+                                tfVars_filename = "prod.tfvars"
+                            }
                             sh "terraform apply -var-file=${tfVars_filename}"
                         }
                     } else {
