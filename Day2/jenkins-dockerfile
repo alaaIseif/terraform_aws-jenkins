@@ -1,0 +1,11 @@
+FROM jenkins/jenkins
+
+USER root
+
+RUN apt-get update && apt-get install -y wget unzip
+RUN wget https://releases.hashicorp.com/terraform/0.15.4/terraform_0.15.4_linux_amd64.zip
+RUN unzip terraform_0.15.4_linux_amd64.zip
+RUN mv terraform /usr/local/bin/
+RUN rm terraform_0.15.4_linux_amd64.zip
+
+USER jenkins
