@@ -25,7 +25,6 @@ pipeline {
             }
         }
         //Initializing
-       
         stage('Terraform Init') {
             steps {
                 sh 'terraform init'
@@ -35,16 +34,8 @@ pipeline {
         stage('Selecting workspace') {
             steps {
                 script {
-                    def environment = params.ENVIRONMENT
-                    if (environment == 'dev') {
-                        tfVars_filename = "dev.tfvars"
-                        sh 'terraform workspace new dev || true' 
-                        sh 'terraform workspace select dev '
-                    } else if (environment == 'prod') {
-                        tfVars_filename = "prod.tfvars"
-                        sh 'terraform workspace new prod || true' 
-                        sh 'terraform workspace select prod '
-                    }
+                    tfVars_filename = "${params.ENVIRONMENT}.tfvars"
+                    sh "terraform workspace new ${environment} || terraform workspace select ${environment}"
                 }
             }
         }
