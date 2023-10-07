@@ -7,8 +7,8 @@ private_subnets_cidr_blocks=["10.0.3.0/24","10.0.4.0/24"]
 availability_zones=["us-east-1a","us-east-1b"]
 protocol="tcp"
 //////
-sender_email="alaa.seif.3112@fmail.com"
-receiver_email="alaa.seif.3112@fmail.com"
+sender_email="alaa.seif.3112@gmail.com"
+receiver_email="alaa.seif.3112@gmail.com"
 function_name="testing-lambda-fn"
 handler_name="lambda_handler"
 lambda_role_name = "lambda-role"

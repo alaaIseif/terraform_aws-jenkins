@@ -12,7 +12,7 @@ resource "aws_lambda_function" "test_lambda" {
   handler          = "${var.handler_name}.lambda_handler"
   filename         = data.archive_file.lambda-code.output_path
   source_code_hash = data.archive_file.lambda-code.output_base64sha256
-  runtime          = "python3.8"
+  runtime          = "${var.runtime}"
   package_type     = "Zip" 
 
   environment {

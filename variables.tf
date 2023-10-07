@@ -29,4 +29,3 @@ variable "handler_name" {}
 variable "lambda_role_name" {}
 variable "lambda_iam_policy_name" {}
 variable "runtime" {}
-

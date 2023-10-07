@@ -7,8 +7,10 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = [ module.network.public_sg.id]
   associate_public_ip_address = true
 
+
+//After applying the Ec2, print the public ip in the inventory file and trigger the changes to the email
   provisioner "local-exec" {
-    command= "echo ${self.public_ip} > inventory"
+    command= "echo ${self.public_ip} > inventory ; python trigger_email.py"
   }
 
   user_data = <<-EOF
