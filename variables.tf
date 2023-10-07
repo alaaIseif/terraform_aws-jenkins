@@ -19,3 +19,14 @@ variable "availability_zones" {
 }
 
 variable "protocol" {}
+
+#######################Lambda Variables###########################
+
+variable "sender_email" {}
+variable "receiver_email" {}
+variable "function_name" {}
+variable "handler_name" {}
+variable "lambda_role_name" {}
+variable "lambda_iam_policy_name" {}
+variable "runtime" {}
+
